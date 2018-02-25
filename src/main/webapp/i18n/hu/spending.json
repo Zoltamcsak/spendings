@@ -1,0 +1,25 @@
+
+{
+    "spendingsApp": {
+        "spending" : {
+            "home": {
+                "title": "Spendings",
+                "createLabel": "Egy új Spending létrehozása",
+                "createOrEditLabel": "Hozzon létre, vagy módosítson Spendingt"
+            },
+            "created": "Egy új Spending lett létrehozva {{ param }} azonosítóval",
+            "updated": "A Spending módosítva lett {{ param }} azonosítóval",
+            "deleted": "A Spending törölve lett {{ param }} azonosítóval",
+            "delete": {
+                "question": "Biztos benne, hogy törölni szeretné az Spendingt {{ id }} azonosítóval?"
+            },
+            "detail": {
+                "title": "Spending"
+            },
+            "price": "Price",
+            "date": "Date",
+            "item": "Item",
+            "user": "User"
+        }
+    }
+}

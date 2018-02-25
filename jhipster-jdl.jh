@@ -1,0 +1,30 @@
+entity Spending {
+	price Long,
+    date LocalDate
+}
+
+entity Item {
+	name String
+}
+
+entity User {
+	username String,
+    firstName String,
+    lastName String,
+    dataOfBirth LocalDate,
+    income Long,
+    spendingGoal Long
+}
+
+relationship OneToOne {
+	Spending{item} to Item
+}
+
+relationship OneToOne {
+	Spending{user} to User
+}
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

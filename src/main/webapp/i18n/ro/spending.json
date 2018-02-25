@@ -1,0 +1,25 @@
+
+{
+    "spendingsApp": {
+        "spending" : {
+            "home": {
+                "title": "Spendings",
+                "createLabel": "Creeare o nouă entitate Spending",
+                "createOrEditLabel": "Creeare sau editare Spending"
+            },
+            "created": "A fost creată o nouă entitate Spending cu identificatorul {{ param }}",
+            "updated": "Spending cu identificatorul {{ param }} a fost actualizată",
+            "deleted": "Spending cu identificatorul {{ param }} a fost ștearsă",
+            "delete": {
+                "question": "Sunteți sigur că doriți să ștergeți Spending {{ id }}?"
+            },
+            "detail": {
+                "title": "Spending"
+            },
+            "price": "Price",
+            "date": "Date",
+            "item": "Item",
+            "user": "User"
+        }
+    }
+}
