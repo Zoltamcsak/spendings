@@ -15,6 +15,7 @@ export class Principal {
 
     authenticate(identity) {
         this.userIdentity = identity;
+        console.log('identity: ', identity);
         this.authenticated = identity !== null;
         this.authenticationState.next(this.userIdentity);
     }
