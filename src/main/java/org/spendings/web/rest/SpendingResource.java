@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,12 @@ public class SpendingResource {
 
     public SpendingResource(SpendingService spendingService) {
         this.spendingService = spendingService;
+    }
+
+    @GetMapping("/spendings/betweenDates/{startDate}/{endDate}")
+    public List<SpendingDTO> findSpendingByDateBetween(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate) {
+        log.debug("REST request to find Spending between dates : {} {}", startDate, endDate);
+        return spendingService.findByDateBetween(startDate, endDate);
     }
 
     /**

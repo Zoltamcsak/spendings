@@ -28,12 +28,14 @@
             <tr *ngFor="let spending of spendings ;trackBy: trackId">
                 <td><a [routerLink]="['../spending', spending.id ]">{{spending.id}}</a></td>
                 <td>{{spending.price}}</td>
-                <td>{{spending.date | date}}</td>
+                <td>{{spending.date | date:'mediumDate'}}</td>
                 <td>
-                    {{items[spending.itemId]?.name}}
+                    <div *ngIf="spending.itemId">
+                        <a [routerLink]="['../item', spending.itemId  ]" >{{spending.itemId}}</a>
+                    </div>
                 </td>
                 <td>
-                    {{currentAccount?.firstName}}
+                    {{currentAccount.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

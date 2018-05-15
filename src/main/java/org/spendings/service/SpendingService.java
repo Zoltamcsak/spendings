@@ -1,6 +1,8 @@
 package org.spendings.service;
 
 import org.spendings.service.dto.SpendingDTO;
+
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -37,4 +39,6 @@ public interface SpendingService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<SpendingDTO> findByDateBetween(LocalDate startDate, LocalDate endDate);
 }

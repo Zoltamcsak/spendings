@@ -5,10 +5,9 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Spending } from './spending.model';
 import { SpendingService } from './spending.service';
-import { Principal, UserService } from '../../shared';
+import {Principal} from '../../shared';
 import { Dictionary } from 'lodash';
-import { Item, ItemService } from '../item';
-import * as _ from 'lodash';
+import {Item, ItemService} from "../item";
 
 @Component({
     selector: 'jhi-spending',
@@ -16,17 +15,16 @@ import * as _ from 'lodash';
 })
 export class SpendingComponent implements OnInit, OnDestroy {
 spendings: Spending[];
-items: Dictionary<Item>;
     currentAccount: any;
     eventSubscriber: Subscription;
+    public items: Dictionary<Item>;
 
     constructor(
         private spendingService: SpendingService,
+        private itemService: ItemService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal,
-        private userService: UserService,
-        private itemService: ItemService
+        private principal: Principal
     ) {
     }
 
@@ -38,16 +36,26 @@ items: Dictionary<Item>;
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
+    loadCurrentMonthSpendings(): void {
+        const currentMonth = new Date().getMonth();
+        const startDate = new Date(new Date().getFullYear(), currentMonth, 1);
+        const endDate = new Date(new Date().getFullYear(), currentMonth + 1, 0);
+        this.spendingService.findByDateBetween(startDate, endDate)
+            .subscribe(result => this.spendings = result.body);
+    }
+
     ngOnInit() {
-        this.loadAll();
-        
+        // this.loadAll();
+        this.loadCurrentMonthSpendings();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.itemService.query().subscribe((res: HttpResponse<Item[]>) => {
-            this.items = _.mapKeys(res.body, item => item.id);
-        });
         this.registerChangeInSpendings();
+        this.spendingService.findByDateBetween(new Date('2018-02-02'), new Date('2018-02-03'))
+          .subscribe((result) =>
+            console.log(result)
+          );
     }
 
     ngOnDestroy() {

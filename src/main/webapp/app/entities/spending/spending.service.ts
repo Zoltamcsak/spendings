@@ -40,6 +40,29 @@ export class SpendingService {
             .map((res: HttpResponse<Spending[]>) => this.convertArrayResponse(res));
     }
 
+    findByDateBetween(startDate: Date, endDate: Date): Observable<HttpResponse<Spending[]>> {
+        const formatStarDate = this.formatDate(startDate);
+        const formatEndDate = this.formatDate(endDate);
+      return this.http.get<Spending[]>(`${this.resourceUrl}/betweenDates/${formatStarDate}/${formatEndDate}`, { observe: 'response'})
+        .map((res: HttpResponse<Spending[]>) => this.convertArrayResponse(res));
+  }
+
+    formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        let year = d.getFullYear();
+
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
+
+        return [year, month, day].join('-');
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }
@@ -73,8 +96,6 @@ export class SpendingService {
      */
     private convert(spending: Spending): Spending {
         const copy: Spending = Object.assign({}, spending);
-        // copy.date = this.dateUtils
-        //     .convertLocalDateToServer(spending.date);
         return copy;
     }
 }

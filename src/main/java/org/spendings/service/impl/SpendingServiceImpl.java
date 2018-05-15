@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,5 +84,14 @@ public class SpendingServiceImpl implements SpendingService {
     public void delete(Long id) {
         log.debug("Request to delete Spending : {}", id);
         spendingRepository.delete(id);
+    }
+
+    @Override
+    public List<SpendingDTO> findByDateBetween(LocalDate startDate, LocalDate endDate) {
+        log.debug("Request Spending between date : {} {}", startDate, endDate);
+        return  spendingRepository.findByDateBetween(startDate, endDate)
+            .stream()
+            .map(spendingMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }

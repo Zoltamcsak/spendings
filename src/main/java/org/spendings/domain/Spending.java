@@ -30,11 +30,11 @@ public class Spending implements Serializable {
     private LocalDate date;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private Item item;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
